@@ -2,59 +2,79 @@ function toggleClickedMenu(el) {
     el.classList.toggle("clicked");
 }
 
-let moveLogoBack;
-let logo;
-let home;
-let skills;
-
-function setGlobals() {
-    moveLogoBack = new CustomEvent('moveLogoBack');
-    logo = document.querySelector(".logo")
-    home = document.querySelector(".nav-links li:nth-child(1)"); 
-    skills = document.querySelector(".nav-links li:nth-child(2)"); 
-}
-
 function animateNav() {
-    setGlobals();
-    //Add the transition information to the element styles
-    //calculate the distance to the edge of nav-links
-    //select the nav list
-    let right = home.getBoundingClientRect().left;
-    let left = logo.getBoundingClientRect().right;
-    let dist = right - left;
-    
-    //we need the clicked class to make it so this element can't be clicked while moving and to translate back   
-    if(!logo.classList.contains("clicked")) {
-        logo.classList.add("clicked");
-        logo.style.transform = `translateX(${dist}px)`
-        logo.style.transition = "transform .5s ease-in";
 
-        logo.addEventListener("transitionend", () => {
-            animateHome();
-        });
+    const Direction = Object.freeze({
+        FORWARD: 0,
+        BACKWARD: 1
+    })
 
-        logo.addEventListener("moveLogoBack", ()=> {
-            logo.classList.remove('clicked')
-            logo.style.transform = null;
-            logo.style.transition = 'transform .5s ease-out'
-        });
-    }
-}
+    let elements = document.querySelectorAll(".movable");
 
-function animateHome() {
-    let right = skills.getBoundingClientRect().left;
-    let left = home.getBoundingClientRect().right;
-    let dist = right - left;
-
-    home.addEventListener("transitionend", () => {
-        home.style.transform = null;
-        console.log("adding listener")
-        dispatchEvent(moveLogoBack)
+    elements = Array.from(elements).filter(element => {
+        return window.getComputedStyle(element).display !== 'none';
     });
 
-    home.style.transform = `translateX(${dist}px)`
-    home.style.transition = "transform .1s ease-out";
+    if(elements.length <= 1) {
+        return
+    }
+  
+    function moveToNextElement(index, dir) {
 
+        if (dir == Direction.BACKWARD && index < 0) {
+            return; 
+        }
 
-    
-}
+        const element = elements[index];
+
+        let dist;
+        if(dir == Direction.FORWARD) {
+            dist = elements[index + 1].getBoundingClientRect().left - element.getBoundingClientRect().right;
+        }
+
+        if(index == 0 && dir == Direction.FORWARD) {
+            element.style.transition = "transform .7s ease-in";
+        } else if (index == 0 && dir == Direction.BACKWARD) {
+            element.style.transition = "transform 1.4s ease-out";
+        } else {
+            element.style.transition = "transform .07s ease-out";
+        } 
+
+        if(dir == Direction.FORWARD) {
+            element.style.transform = `translateX(${dist}px)`; 
+        } else {
+            element.style.transform = '';
+        }
+        
+
+        function handleTransitionEnd() {
+            element.removeEventListener('transitionend', handleTransitionEnd); 
+
+            let nextInd;
+            //decide next index
+            if(index < elements.length - 2 && dir == Direction.FORWARD) {
+                nextInd = index + 1;
+            } else if (index <= elements.length - 2 && dir == Direction.BACKWARD) {
+                nextInd = index - 1;
+            } else {
+                nextInd = index;
+            }
+
+            //decide next direction
+            //only switch when we are at our last movable element
+            let nextDir;
+            if(index == elements.length - 2) {
+                nextDir = Direction.BACKWARD;
+            } else {
+                nextDir = dir;
+            }
+
+            moveToNextElement(nextInd, nextDir); 
+        }
+
+        element.addEventListener('transitionend', handleTransitionEnd, { once: true });
+    }
+  
+    moveToNextElement(0, Direction.FORWARD); 
+  }
+

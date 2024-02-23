@@ -74,11 +74,9 @@ nav ul li:last-child {
     transform: translateY(-11px) rotate(-45deg);
 }
 
-
-
-
-
-
+#right-content {
+    display: flex;
+}
 
 
 
@@ -90,6 +88,10 @@ nav ul li:last-child {
     }
 
     nav ul {
+        display: none;
+    }
+
+    nav ul li {
         display: none;
     }
 }

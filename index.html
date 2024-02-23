@@ -12,18 +12,20 @@
 </head>
 <body>
     <nav>
-        <span class="logo" onclick="animateNav()">Logo</span>
-        <ul class="nav-links">
-            <li><a href="#" class="nav-link">Home</a></li>
-            <li><a href="#" class="nav-link">Skills</a></li>
-            <li><a href="#" class="nav-link">Education</a></li>
-            <li><a href="#" class="nav-link">Experience</a></li>
-            <li><a href="#" class="nav-link">Projects</a></li>
-        </ul>
-        <div class="dropdown nav-links" onclick="toggleClickedMenu(this)">
-            <div class="dropdown-bar"></div>
-            <div class="dropdown-bar"></div>
-            <div class="dropdown-bar"></div>
+        <span class="logo movable" onclick="animateNav()">Logo</span>
+        <div id="right-content">
+            <ul class="nav-links">
+                <li class="movable"><a href="#" class="nav-link">Home</a></li>
+                <li class="movable"><a href="#" class="nav-link">Skills</a></li>
+                <li class="movable"><a href="#" class="nav-link">Education</a></li>
+                <li class="movable"><a href="#" class="nav-link">Experience</a></li>
+                <li class="movable"><a href="#" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="dropdown nav-links movable" onclick="toggleClickedMenu(this)">
+                <div class="dropdown-bar"></div>
+                <div class="dropdown-bar"></div>
+                <div class="dropdown-bar"></div>
+            </div>
         </div>
     </nav>
 
