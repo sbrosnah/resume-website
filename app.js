@@ -2,14 +2,26 @@ const sections = ['Home', 'Skills', 'Education', 'Experience', 'Projects'];
 
 document.addEventListener('DOMContentLoaded', function() {
     configureDOMElements();
-  });
+});
+
+document.addEventListener('resize', () => {
+    //
+});
 
 function configureDOMElements() {
     let topNavBarContainer = document.querySelector("ul.nav-links");
+    let viewPortWidth = window.innerWidth;
+
     for (let i = 0; i < sections.length; i++) {
-        //Add the sections for the top nav bar
+        //Add the nav sections 
         let li = document.createElement("li");
-        li.classList.add("movable");
+
+        if(viewPortWidth <= 600) {
+            li.classList.add("movable");
+        } else {
+            li.classList.add("dropdown-link");
+        }
+
         let a = document.createElement("a");
         a.href = "#" + sections[i];
         a.classList.add("nav-link");
