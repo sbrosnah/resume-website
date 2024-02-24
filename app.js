@@ -1,3 +1,28 @@
+const sections = ['Home', 'Skills', 'Education', 'Experience', 'Projects'];
+
+document.addEventListener('DOMContentLoaded', function() {
+    configureDOMElements();
+  });
+
+function configureDOMElements() {
+    let topNavBarContainer = document.querySelector("ul.nav-links");
+    for (let i = 0; i < sections.length; i++) {
+        //Add the sections for the top nav bar
+        let li = document.createElement("li");
+        li.classList.add("movable");
+        let a = document.createElement("a");
+        a.href = "#" + sections[i];
+        a.classList.add("nav-link");
+        a.innerHTML = sections[i];
+        li.appendChild(a);
+        topNavBarContainer.appendChild(li);
+    }
+
+}
+
+
+
+
 function toggleClickedMenu(el) {
     el.classList.toggle("clicked");
 }
