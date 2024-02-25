@@ -2,37 +2,50 @@ const sections = ['Home', 'Skills', 'Education', 'Experience', 'Projects'];
 
 document.addEventListener('DOMContentLoaded', function() {
     configureDOMElements();
+    window.addEventListener('resize', () => {
+        //Add a listener to redraw the nav elements when the windo is resized
+        configureDOMElements();
+    });
 });
 
-document.addEventListener('resize', () => {
-    //
-});
+
 
 function configureDOMElements() {
     let topNavBarContainer = document.querySelector("ul.nav-links");
+
+    if(topNavBarContainer.children.length == 0) {
+        for (let i = 0; i < sections.length; i++) {
+            //Add the nav sections 
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            a.href = "#" + sections[i];
+            a.classList.add("nav-link");
+            a.innerHTML = sections[i];
+            li.appendChild(a);
+            topNavBarContainer.appendChild(li);
+        }
+    }
     let viewPortWidth = window.innerWidth;
 
     for (let i = 0; i < sections.length; i++) {
-        //Add the nav sections 
-        let li = document.createElement("li");
-
-        if(viewPortWidth <= 600) {
+        let li = topNavBarContainer.children[i];
+        if(viewPortWidth >= 600) {
             li.classList.add("movable");
         } else {
             li.classList.add("dropdown-link");
         }
-
-        let a = document.createElement("a");
-        a.href = "#" + sections[i];
-        a.classList.add("nav-link");
-        a.innerHTML = sections[i];
-        li.appendChild(a);
-        topNavBarContainer.appendChild(li);
     }
 
+    //determine if movable should be on the dropdown toggle 
+    let dropdownToggle = document.querySelector(".dropdown");
+    if (viewPortWidth >= 600) {
+        dropdownToggle.classList.remove("movable");
+    } else {
+        dropdownToggle.classList.add("movable");
+    }
+
+
 }
-
-
 
 
 function toggleClickedMenu(el) {
