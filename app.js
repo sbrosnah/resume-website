@@ -40,8 +40,14 @@ function configureDOMElements() {
     let dropdownToggle = document.querySelector(".dropdown");
     if (viewPortWidth >= 600) {
         dropdownToggle.classList.remove("movable");
+        dropdownToggle.classList.remove("clicked");
+        let links = document.querySelectorAll(".dropdown-link");
+        for(let i = 0; i < links.length; i++) {
+            links[i].classList.revove("clicked");
+        }
     } else {
         dropdownToggle.classList.add("movable");
+        
     }
 
 
