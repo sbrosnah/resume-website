@@ -50,6 +50,12 @@ function configureDOMElements() {
 
 function toggleClickedMenu(el) {
     el.classList.toggle("clicked");
+
+    //make other drowdown elements visible 
+    let links = document.querySelectorAll(".dropdown-link");
+    for(let i = 0; i < links.length; i++) {
+        links[i].classList.toggle("clicked");
+    }
 }
 
 function animateNav() {
