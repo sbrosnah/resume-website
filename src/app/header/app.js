@@ -29,7 +29,7 @@ function configureDOMElements() {
 
     for (let i = 0; i < sections.length; i++) {
         let li = topNavBarContainer.children[i];
-        if(viewPortWidth >= 600) {
+        if(viewPortWidth >= 800) {
             li.classList.add("movable");
         } else {
             li.classList.add("dropdown-link");
@@ -38,12 +38,12 @@ function configureDOMElements() {
 
     //determine if movable should be on the dropdown toggle 
     let dropdownToggle = document.querySelector(".dropdown");
-    if (viewPortWidth >= 600) {
+    if (viewPortWidth >= 800) {
         dropdownToggle.classList.remove("movable");
         dropdownToggle.classList.remove("clicked");
         let links = document.querySelectorAll(".dropdown-link");
         for(let i = 0; i < links.length; i++) {
-            links[i].classList.revove("clicked");
+            links[i].classList.remove("clicked");
         }
     } else {
         dropdownToggle.classList.add("movable");
