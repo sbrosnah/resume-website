@@ -3,12 +3,20 @@
     <nav>
         <span class="logo movable" onclick="animateNav()">Logo</span>
         <div id="right-content">
-            <div class="dropdown movable" onclick="toggleClickedMenu(this)">
-                <div class="dropdown-bar"></div>
-                <div class="dropdown-bar"></div>
-                <div class="dropdown-bar"></div>
-            </div>
-            <ul class="nav-links"></ul>
+            @if(!screenIsLarge) {
+                <div class="dropdown movable" [ngClass]="{'clicked': dropdownClicked}" (click)="toggleDropdown()">
+                    @for(i of [].constructor(3); track i) {
+                        <div class="dropdown-bar" [ngClass]="{'clicked': dropdownClicked}"></div>
+                    }
+                </div>
+            }
+            <ul class="nav-links" [ngClass]="{'dropdown-menu-items': !screenIsLarge}">
+                @for (section of sections; track section) {
+                    <li [ngClass]="{'movable': screenIsLarge, 'dropdown-link': !screenIsLarge, 'clicked': dropdownClicked}">
+                        <a class="nav-link" [href]="'#' + section">{{ section }}</a>
+                    </li>
+                }
+            </ul>
         </div>
     </nav>
 </body>

@@ -29,6 +29,10 @@ nav {
             margin-right: 0;
         }
     }
+
+    ul.dropdown-menu-items {
+        display: none;
+    }
 }
 
 .nav-link {
@@ -37,7 +41,7 @@ nav {
 
 .dropdown {
     width: 40px;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
@@ -68,23 +72,4 @@ nav {
 
 #right-content {
     display: flex;
-}
-
-
-
-@media screen and (max-width: 800px) {
-
-    /* --------------nav bar---------------- */
-    .dropdown {
-        display: flex;
-    }
-
-    nav ul {
-        display: none;
-
-        li {
-            display: none;
-        }
-    }
-
 }
