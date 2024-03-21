@@ -90,8 +90,35 @@ nav {
     display: flex;
 }
 
-.glitch {
+
+.glitch, .glitch-box {
     position: relative;
+}
+
+
+
+.glitch-box::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 2px 0 0 lightgreen;
+    left: 2px;
+    animation: noise-3 1.23s linear infinite;
+}
+
+.glitch-box::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: -2px -2px 0 0 magenta;
+    left: -2px;
+    animation: noise-3 3s ease-in-out infinite;
 }
 
 .glitch::before {
@@ -102,7 +129,7 @@ nav {
     background: black;
     overflow: hidden;
     top: 0;
-    animation: noise-1 3s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
+    animation: noise-1 3s linear infinite alternate-reverse;
 }
 
 .glitch::after {
@@ -113,11 +140,25 @@ nav {
     background: black;
     overflow: hidden;
     top: 0;
-    animation: noise-2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
+    animation: noise-2 3s linear infinite alternate-reverse;
+}
+
+@keyframes noise-3 {
+    $steps: 15;
+    @for $i from 1 through $steps {
+        #{percentage($i*calc(1/$steps))} {
+            @if $i % 2 == 0 {
+                opacity: 0;
+            } @else {
+                opacity: 100%;
+            }
+            z-index: ($i * 7) % 21;
+        }
+    }
 }
 
 @keyframes noise-1 {
-    $steps: 15;
+    $steps: 30;
     @for $i from 1 through $steps {
         #{percentage($i*calc(1/$steps))} {
         $top: random(100);
@@ -137,3 +178,6 @@ nav {
         }
     }
 }
+
+
+

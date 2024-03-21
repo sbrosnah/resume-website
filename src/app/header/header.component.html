@@ -6,7 +6,7 @@
             @if(!screenIsLarge) {
                 <div class="dropdown movable" [ngClass]="{'clicked': dropdownClicked}" (click)="toggleDropdown()">
                     @for(i of [].constructor(3); track i) {
-                        <div class="dropdown-bar" [ngClass]="{'clicked': dropdownClicked}"></div>
+                        <div class="dropdown-bar glitch-box" [ngClass]="{'clicked': dropdownClicked}"></div>
                     }
                 </div>
             }
