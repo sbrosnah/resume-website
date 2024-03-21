@@ -1,7 +1,7 @@
 
 <body>
     <nav>
-        <span class="logo movable" onclick="animateNav()">Logo</span>
+        <span class="logo movable glitch" (click)="animateNav()" [attr.data-text]="logoText">{{ logoText }}</span>
         <div id="right-content">
             @if(!screenIsLarge) {
                 <div class="dropdown movable" [ngClass]="{'clicked': dropdownClicked}" (click)="toggleDropdown()">
@@ -13,7 +13,7 @@
             <ul class="nav-links" [ngClass]="{'dropdown-menu-items': !screenIsLarge}">
                 @for (section of sections; track section) {
                     <li [ngClass]="{'movable': screenIsLarge, 'dropdown-link': !screenIsLarge, 'clicked': dropdownClicked}">
-                        <a class="nav-link" [href]="'#' + section">{{ section }}</a>
+                        <a class="nav-link glitch" [attr.data-text]="section" [href]="'#' + section">{{ section }}</a>
                     </li>
                 }
             </ul>

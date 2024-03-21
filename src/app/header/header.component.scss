@@ -7,10 +7,16 @@ nav {
     justify-content: space-between;
     padding: 10px 20px;
 
-    span {
+    span.logo {
         font-family: 'Anton';
         font-weight: 700;
-        font-size: 48px;
+        font-size: 72px;
+        cursor: pointer;
+
+        .first-letter {
+            color: rgb(255, 94, 255);
+        }
+        
     }
 
     ul {
@@ -23,6 +29,16 @@ nav {
         li {
             display: inline-block;
             margin-right: 40px;
+            a {
+                font-family: 'Anton';
+                font-size: 28px;
+                color: white;
+                transition: 0.3s ease;
+            }
+
+            a:hover {
+                font-size: 38px;
+            }
         }
 
         li:last-child {
@@ -72,4 +88,52 @@ nav {
 
 #right-content {
     display: flex;
+}
+
+.glitch {
+    position: relative;
+}
+
+.glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: -5px 0 magenta;
+    background: black;
+    overflow: hidden;
+    top: 0;
+    animation: noise-1 3s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
+}
+
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -5px 0 lightgreen;
+    background: black;
+    overflow: hidden;
+    top: 0;
+    animation: noise-2 3s linear infinite alternate-reverse, glitch 5s 5s infinite;
+}
+
+@keyframes noise-1 {
+    $steps: 15;
+    @for $i from 1 through $steps {
+        #{percentage($i*calc(1/$steps))} {
+        $top: random(100);
+        $bottom: random(101 - $top);
+        clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+    }
+}
+
+@keyframes noise-2 {
+    $steps: 30;
+    @for $i from 0 through $steps {
+        #{percentage($i*calc(1/$steps))} {
+        $top: random(100);
+        $bottom: random(101 - $top);
+        clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+    }
 }
