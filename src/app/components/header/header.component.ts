@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
-import { Direction } from '../shared/enums';
+import { Direction } from '../../shared/enums';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   providers: [],
   animations: [],
 //   changeDetection: ChangeDetectionStrategy.OnPush
@@ -15,7 +16,7 @@ import { Direction } from '../shared/enums';
 export class HeaderComponent implements OnInit {
   public sections: string[] = ['About', 'Skills', 'Education', 'Experience', 'Projects'];
   public logoText: string = "SpencerBrosnahan"
-  private widthThreshold: number = 1000;
+  private widthThreshold: number = 800;
   public screenIsLarge: boolean = false;
   public dropdownClicked: boolean = false;
   public logoClicked: boolean = false;

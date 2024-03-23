@@ -2,10 +2,12 @@
 
 /* --------------nav bar---------------- */
 
+$base-margin-right: 40px;
+
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 10px 40px;
 
     span.logo {
         font-family: 'Anton';
@@ -28,7 +30,7 @@ nav {
 
         li {
             display: inline-block;
-            margin-right: 40px;
+            margin-right: $base-margin-right;
             a {
                 font-family: 'Anton';
                 font-size: 28px;
@@ -38,6 +40,7 @@ nav {
 
             a:hover {
                 font-size: 38px;
+                margin-right: calc(#{$base-margin-right} - 0);
             }
         }
 
