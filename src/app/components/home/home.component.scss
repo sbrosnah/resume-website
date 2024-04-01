@@ -1,3 +1,14 @@
 
-
+#portrait-background {
+    background-image: url('../../../assets/portrait.png'); /* Replace 'path/to/your-image.jpg' with the actual path to your image */
+    height: 100%; /* 100% of the viewport height */
+    width: 100%; /* 100% of the viewport width */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Scale the image to be as large as possible without stretching it */
+    position: fixed; /* Use fixed to make it cover the entire screen, even on scrolling */
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure it stays behind other content */
+}
 

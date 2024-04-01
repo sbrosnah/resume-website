@@ -1,22 +1,21 @@
 
-<body>
-    <nav>
-        <span [routerLink]="[ '/home' ]" routerLinkActive="active" class="logo movable glitch" (click)="animateNav()" [attr.data-text]="logoText">{{ logoText }}</span>
-        <div id="right-content">
-            @if(!screenIsLarge) {
-                <div class="dropdown movable" [ngClass]="{'clicked': dropdownClicked}" (click)="toggleDropdown()">
-                    @for(i of [].constructor(3); track i) {
-                        <div class="dropdown-bar glitch-box" [ngClass]="{'clicked': dropdownClicked}"></div>
-                    }
-                </div>
-            }
-            <ul class="nav-links" [ngClass]="{'dropdown-menu-items': !screenIsLarge}">
-                @for (section of sections; track section) {
-                    <li [ngClass]="{'movable': screenIsLarge, 'dropdown-link': !screenIsLarge, 'clicked': dropdownClicked}">
-                        <a [routerLink]="[ '/' + section.toLowerCase()]" routerLinkActive="active" class="nav-link glitch" [attr.data-text]="section">{{ section }}</a>
-                    </li>
+
+<nav>
+    <span [routerLink]="[ '/home' ]" routerLinkActive="active" class="logo movable glitch" (click)="animateNav()" [attr.data-text]="logoText">{{ logoText }}</span>
+    <div id="right-content">
+        @if(!screenIsLarge) {
+            <div class="dropdown movable" [ngClass]="{'clicked': dropdownClicked}" (click)="toggleDropdown()">
+                @for(i of [].constructor(3); track i) {
+                    <div class="dropdown-bar glitch-box" [ngClass]="{'clicked': dropdownClicked}"></div>
                 }
-            </ul>
-        </div>
-    </nav>
-</body>
+            </div>
+        }
+        <ul class="nav-links" [ngClass]="{'dropdown-menu-items': !screenIsLarge}">
+            @for (section of sections; track section) {
+                <li [ngClass]="{'movable': screenIsLarge, 'dropdown-link': !screenIsLarge, 'clicked': dropdownClicked}">
+                    <a [routerLink]="[ '/' + section.toLowerCase()]" routerLinkActive="active" class="nav-link glitch" [attr.data-text]="section">{{ section }}</a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

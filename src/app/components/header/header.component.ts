@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Direction } from '../../shared/enums';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,23 +13,33 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   providers: [],
   animations: [],
-//   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
   public sections: string[] = ['About', 'Skills', 'Education', 'Experience', 'Projects'];
   public logoText: string = "SpencerBrosnahan"
-  private widthThreshold: number = 800;
   public screenIsLarge: boolean = false;
   public dropdownClicked: boolean = false;
   public logoClicked: boolean = false;
 
-  @HostListener('window:resize', [])
-  onResize() {
-    this.screenIsLarge = window.innerWidth > this.widthThreshold;
-  }
+  private widthThreshold: number = 800;
+  private unsubscribe$ = new Subject<void>();
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
-    this.onResize();
+    this.breakpointObserver
+    .observe([`(max-width: ${this.widthThreshold}px)`])
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(result => {
+        this.screenIsLarge = !result.matches;
+    });
+  }
+
+
+  ngOnDestroy(): void {
+      this.unsubscribe$.next();
+      this.unsubscribe$.complete();
   }
 
   public toggleDropdown() {

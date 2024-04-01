@@ -2,18 +2,26 @@
 
 /* --------------nav bar---------------- */
 
-$base-margin-right: 40px;
+$base-logo-margin-right: 10%;
+$base-logo-font-size: 72px;
+$base-nav-font-size: 28px;
+$base-nav-margin-right: 40px;
+$base-dropdown-scale: 1.2;
+
+
 
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 10px 40px;
+    padding: 5px 20px;
 
     span.logo {
+        display: inline-flex;
         font-family: 'Anton';
         font-weight: 700;
-        font-size: 72px;
         cursor: pointer;
+        margin-right: $base-logo-margin-right;
+        font-size: $base-logo-font-size;
 
         .first-letter {
             color: rgb(255, 94, 255);
@@ -24,23 +32,23 @@ nav {
     ul {
         list-style-type: none;
         padding: 0;
-        display: flex;
+        display: inline-flex;
         align-items: flex-end;
         margin-bottom: 10px;
 
         li {
             display: inline-block;
-            margin-right: $base-margin-right;
+            margin-right: $base-nav-margin-right;
             a {
                 font-family: 'Anton';
-                font-size: 28px;
+                font-size: $base-nav-font-size;
                 color: white;
                 transition: 0.3s ease;
             }
 
             a:hover {
                 font-size: 38px;
-                margin-right: calc(#{$base-margin-right} - 0);
+                margin-right: calc(#{$base-logo-margin-right} - 0);
             }
         }
 
@@ -53,6 +61,7 @@ nav {
         display: none;
     }
 }
+
 
 .nav-link {
     text-decoration: none;
@@ -73,6 +82,8 @@ nav {
         background-color: white;
         transition: transform 0.5s, opacity 0.5s;
     }
+
+    transform: scale($base-dropdown-scale);
 }
 
 .dropdown.clicked {
@@ -91,6 +102,7 @@ nav {
 
 #right-content {
     display: flex;
+    width: fit-content;
 }
 
 
@@ -145,6 +157,8 @@ nav {
     top: 0;
     animation: noise-2 3s linear infinite alternate-reverse;
 }
+
+
 
 @keyframes noise-3 {
     $steps: 15;
