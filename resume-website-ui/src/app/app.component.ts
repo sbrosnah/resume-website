@@ -12,8 +12,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
   standalone: true,
   imports: [
     RouterOutlet, 
-    HeaderComponent,
     AboutComponent,
+    HeaderComponent,
     SkillsComponent,
     EducationComponent,
     ExperienceComponent,
