@@ -30,7 +30,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-resume-website-ui/.angular/
+resume-website-ui/.angular/cache/
 .sass-cache/
 /connect.lock
 /coverage
