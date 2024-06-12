@@ -42,4 +42,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/original-files/
+original-files/
+resume-website-ui/dist/
