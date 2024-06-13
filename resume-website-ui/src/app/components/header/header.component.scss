@@ -1,0 +1,200 @@
+
+
+/* --------------nav bar---------------- */
+
+$base-logo-margin-right: 10%;
+$base-logo-font-size: 72px;
+$base-nav-font-size: 28px;
+$base-nav-margin-right: 40px;
+$base-dropdown-scale: 1.2;
+
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+
+    span.logo {
+        display: inline-flex;
+        font-family: 'Anton';
+        font-weight: 700;
+        cursor: pointer;
+        margin-right: $base-logo-margin-right;
+        font-size: $base-logo-font-size;
+
+        .first-letter {
+            color: rgb(255, 94, 255);
+        }
+        
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: inline-flex;
+        align-items: flex-end;
+        margin-bottom: 10px;
+
+        li {
+            display: inline-block;
+            margin-right: $base-nav-margin-right;
+            a {
+                font-family: 'Anton';
+                font-size: $base-nav-font-size;
+                color: white;
+                transition: 0.3s ease;
+            }
+
+            a:hover {
+                font-size: 38px;
+                margin-right: calc(#{$base-logo-margin-right} - 0);
+            }
+        }
+
+        li:last-child {
+            margin-right: 0;
+        }
+    }
+
+    ul.dropdown-menu-items {
+        display: none;
+    }
+}
+
+
+.nav-link {
+    text-decoration: none;
+}
+
+.dropdown {
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+
+    .dropdown-bar {
+        width: 100%;
+        margin: 3px 0;
+        height: 5px;
+        border-radius: 5px;
+        background-color: white;
+        transition: transform 0.5s, opacity 0.5s;
+    }
+
+    transform: scale($base-dropdown-scale);
+}
+
+.dropdown.clicked {
+    .dropdown-bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    .dropdown-bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .dropdown-bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+}
+
+#right-content {
+    display: flex;
+    width: fit-content;
+}
+
+
+.glitch, .glitch-box {
+    position: relative;
+}
+
+
+
+.glitch-box::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 2px 0 0 lightgreen;
+    left: 2px;
+    animation: noise-3 1.23s linear infinite;
+}
+
+.glitch-box::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: -2px -2px 0 0 magenta;
+    left: -2px;
+    animation: noise-3 3s ease-in-out infinite;
+}
+
+.glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: -5px 0 magenta;
+    background: black;
+    overflow: hidden;
+    top: 0;
+    animation: noise-1 3s linear infinite alternate-reverse;
+}
+
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -5px 0 lightgreen;
+    background: black;
+    overflow: hidden;
+    top: 0;
+    animation: noise-2 3s linear infinite alternate-reverse;
+}
+
+
+
+@keyframes noise-3 {
+    $steps: 15;
+    @for $i from 1 through $steps {
+        #{percentage($i*calc(1/$steps))} {
+            @if $i % 2 == 0 {
+                opacity: 0;
+            } @else {
+                opacity: 100%;
+            }
+            z-index: ($i * 7) % 21;
+        }
+    }
+}
+
+@keyframes noise-1 {
+    $steps: 30;
+    @for $i from 1 through $steps {
+        #{percentage($i*calc(1/$steps))} {
+        $top: random(100);
+        $bottom: random(101 - $top);
+        clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+    }
+}
+
+@keyframes noise-2 {
+    $steps: 30;
+    @for $i from 0 through $steps {
+        #{percentage($i*calc(1/$steps))} {
+        $top: random(100);
+        $bottom: random(101 - $top);
+        clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+    }
+}
+
+
+
