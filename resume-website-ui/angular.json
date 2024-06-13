@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "resume-website": {
+    "resume-website-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "resume-website:build:production"
+              "buildTarget": "resume-website-ui:build:production"
             },
             "development": {
-              "buildTarget": "resume-website:build:development"
+              "buildTarget": "resume-website-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "resume-website:build"
+            "buildTarget": "resume-website-ui:build"
           }
         },
         "test": {

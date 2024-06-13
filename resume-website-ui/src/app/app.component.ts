@@ -22,5 +22,5 @@ import { ProjectsComponent } from './components/projects/projects.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'resume-website';
+  title = 'resume-website-ui';
 }
